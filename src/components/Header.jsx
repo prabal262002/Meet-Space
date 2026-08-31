@@ -1,5 +1,5 @@
 
-
+import { Link } from "react-router-dom";
 const Header = () => {
 
   return (
@@ -7,12 +7,14 @@ const Header = () => {
       <div className="container-fluid">
         <div className="row align-items-center">
           <div className="col-auto">
-            <h1
-              className="mb-0"
-              style={{ color: "#E91E63", fontSize: "28px", fontWeight: "bold" }}
+            <Link to="/">
+              <h1
+                className="mb-0"
+                style={{ color: "#E91E63", fontSize: "28px", fontWeight: "bold" }}
             >
               MeetSpace
             </h1>
+            </Link>
           </div>
 
           <div className="col flex-grow-1 mx-4">

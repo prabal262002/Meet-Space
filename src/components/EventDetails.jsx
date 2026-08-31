@@ -1,3 +1,6 @@
+import Header from "./Header";
+import { useParams } from "react-router-dom";
+import useFetch from "../useFetch";
 const EventDetails = () => {
   const { id } = useParams();
   const { data, loading, error } = useFetch(
@@ -9,6 +12,8 @@ const EventDetails = () => {
   if (!data) return <p>No event found.</p>;
 
   return (
+    <>
+    <Header></Header>
     <main className="container py-4">
       <h1>{data.title}</h1>
 
@@ -57,28 +62,11 @@ const EventDetails = () => {
 
           <h2 className="mt-4">Speakers: ({data.speakers?.length || 0})</h2>
 
-          <div className="row">
-            {data.speakers?.map((speaker) => (
-              <div className="col-6" key={speaker._id}>
-                <div className="card p-2 text-center">
-                  <img
-                    src={speaker.imageUrl}
-                    alt={speaker.name}
-                    className="rounded-circle mx-auto"
-                    width="70"
-                    height="70"
-                  />
-                  <strong>{speaker.name}</strong>
-                  <small>{speaker.designation}</small>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <button className="btn btn-danger w-100 mt-4">RSVP</button>
+          
         </aside>
       </div>
     </main>
+    </>
   );
 };
 

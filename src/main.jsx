@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import App from "./App.jsx";
+import EventDetails from "./components/EventDetails.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 const router = createBrowserRouter([
   {
