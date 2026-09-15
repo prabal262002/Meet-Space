@@ -1,5 +1,6 @@
 import "./App.css";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import { useState } from "react";
 import useFetch from "./useFetch";
 import {Link} from "react-router-dom";
@@ -23,7 +24,7 @@ function App() {
     <>
       <Header />
       <main>
-        <div className="container-fluid">
+        <div className="container">
           <div className="row align-items-center mb-4">
             <div className="col">
               <h1 className="display-4 mb-0">Meetup Events</h1>
@@ -47,11 +48,12 @@ function App() {
         {data && (
           <div className="row g-4">
             {filteredEvents.map((event) => (
-              <Link to={`/events/${event._id}`}>
+              
               <div key={event._id} className="col-md-4"
               onClick={()=>console.log(`Navigating to event details for event ID: ${event._id}`)}
               style={{ cursor: "pointer" }}>
-                <div className="card h-100">
+                <Link to={`/events/${event._id}`}>
+                <div className="card h-100" style={{ backgroundColor: "#f8f8f8", border: "none" }}>
                   <img
                     src={event.thumbnailUrl}
                     alt={event.title}
@@ -75,13 +77,14 @@ function App() {
                     <h5 className="card-title">{event.title}</h5>
                   </div>
                 </div>
+                </Link>
               </div>
-              </Link>
             ))}
           </div>
           
         )}
       </main>
+      <Footer />
     </>
   );
 }

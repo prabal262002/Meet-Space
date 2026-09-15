@@ -50,7 +50,7 @@ const EventDetails = () => {
         </section>
 
         <aside className="col-md-5">
-          <div className="card p-4">
+          <div className="card p-4" style={{ backgroundColor: "#f8f8f8", border: "none" }}>
             <p>
               {new Date(data.date).toLocaleDateString()} at{" "}
               {data.sessionTimings}
@@ -62,8 +62,26 @@ const EventDetails = () => {
 
           <h2 className="mt-4">Speakers: ({data.speakers?.length || 0})</h2>
 
-          
-        </aside>
+          <div className="speaker-list mt-3">
+            {data.speakers?.length ? (
+              data.speakers.map((speaker) => (
+                <div key={speaker.name} className="speaker-item d-flex align-items-center mb-3">
+                  <img
+                    src={speaker.imageUrl || "https://via.placeholder.com/60?text=Speaker"}
+                    alt={speaker.name}
+                    className="speaker-avatar"
+                  />
+                  <div className="ms-3 text-start">
+                    <div className="fw-semibold text-dark">{speaker.name}</div>
+                    <small className="text-muted">{speaker.designation}</small>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p className="text-muted mb-0">No speakers listed.</p>
+            )}
+          </div>
+        </aside> 
       </div>
     </main>
     </>
