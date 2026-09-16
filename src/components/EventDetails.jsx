@@ -4,7 +4,7 @@ import useFetch from "../useFetch";
 const EventDetails = () => {
   const { id } = useParams();
   const { data, loading, error } = useFetch(
-    `http://localhost:5000/events/${id}`,
+    `https://events-backend-taupe.vercel.app/events/${id}`,
   );
 
   if (loading) return <p>Loading event details...</p>;
@@ -50,7 +50,7 @@ const EventDetails = () => {
         </section>
 
         <aside className="col-md-5">
-          <div className="card p-4" style={{ backgroundColor: "#f8f8f8", border: "none" }}>
+          <div className="card p-4">
             <p>
               {new Date(data.date).toLocaleDateString()} at{" "}
               {data.sessionTimings}
@@ -81,7 +81,7 @@ const EventDetails = () => {
               <p className="text-muted mb-0">No speakers listed.</p>
             )}
           </div>
-        </aside> 
+        </aside>
       </div>
     </main>
     </>

@@ -6,6 +6,7 @@ import useFetch from "./useFetch";
 import {Link} from "react-router-dom";
 function App() {
   const [eventType, setEventType] = useState("All Events");
+  const [searchTerm, setSearchTerm] = useState("");
   const { data, loading, error } = useFetch(
     "https://events-backend-taupe.vercel.app/events",
   );
@@ -13,17 +14,23 @@ function App() {
 
   const filteredEvents = data
     ? data.filter((event) => {
-        if (eventType === "All Events") return true;
-        if (eventType === "Online Event") return event.eventType === "Online";
-        if (eventType === "Offline Event") return event.eventType === "Offline";
-        return true;
+        const matchesType =
+          eventType === "All Events" ||
+          (eventType === "Online Event" && event.eventType === "Online") ||
+          (eventType === "Offline Event" && event.eventType === "Offline");
+        const searchText = searchTerm.toLowerCase();
+        const matchesSearch =
+          event.title.toLowerCase().includes(searchText) ||
+          event.eventType.toLowerCase().includes(searchText);
+
+        return matchesType && matchesSearch;
       })
     : [];
 
   return (
     <>
-      <Header />
-      <main>
+      <Header onSearch={setSearchTerm} />
+      <main className="pb-5">
         <div className="container">
           <div className="row align-items-center mb-4">
             <div className="col">
@@ -35,7 +42,7 @@ function App() {
                 style={{ border: "none", backgroundColor: "#f5f5f5" }}
                 onChange={(e) => setEventType(e.target.value)}
               >
-                <option>Select Event Type</option>
+                <option value="All Events">All Events</option>
                 <option>Online Event</option>
                 <option>Offline Event</option>
               </select>

@@ -1,6 +1,6 @@
 
 import { Link } from "react-router-dom";
-const Header = () => {
+const Header = ({ onSearch = () => {} }) => {
 
   return (
     <header className="bg-white border-bottom py-3">
@@ -23,6 +23,7 @@ const Header = () => {
               className="form-control rounded-pill"
               placeholder="Search by title and type..."
               style={{ backgroundColor: "#f5f5f5" }}
+              onChange={event =>onSearch(event.target.value)}
             />
           </div>
         </div>
