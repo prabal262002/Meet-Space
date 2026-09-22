@@ -18,12 +18,18 @@ function App() {
           eventType === "All Events" ||
           (eventType === "Online Event" && event.eventType === "Online") ||
           (eventType === "Offline Event" && event.eventType === "Offline");
+
         const searchText = searchTerm.toLowerCase();
+
         const matchesSearch =
           event.title.toLowerCase().includes(searchText) ||
           event.eventType.toLowerCase().includes(searchText);
 
-        return matchesType && matchesSearch;
+        const matchesTags = event.tags?.some((tag)=>
+          tag.toLowerCase().includes(searchText)
+        );
+
+        return matchesType && (matchesSearch || matchesTags);
       })
     : [];
 
